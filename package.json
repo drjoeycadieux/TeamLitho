@@ -1,0 +1,22 @@
+{
+  "name": "teamlitho",
+  "version": "1.0.0",
+  "description": "teamlitho admin",
+  "main": "script.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drjoeycadieux/TeamLitho.git"
+  },
+  "author": "Joey Cadieux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drjoeycadieux/TeamLitho/issues"
+  },
+  "homepage": "https://github.com/drjoeycadieux/TeamLitho#readme",
+  "dependencies": {
+    "firebase-tools": "^9.16.0"
+  }
+}
