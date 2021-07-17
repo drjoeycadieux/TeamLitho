@@ -1,22 +1,45 @@
-var firebaseConfig = {
-	apiKey: "AIzaSyA20eFtdIhWl1oqE2_5o2sAtHj5SstdnSI",
-	authDomain: "teamlitho-9ac2b.firebaseapp.com",
-	databaseURL: "https://teamlitho-9ac2b-default-rtdb.firebaseio.com",
-	projectId: "teamlitho-9ac2b",
-	storageBucket: "teamlitho-9ac2b.appspot.com",
-	messagingSenderId: "587633326348",
-	appId: "1:587633326348:web:76b3b93999231788287129",
-	measurementId: "G-RZEMM11TG3"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		// User is signed in.
 
-var admin = require("firebase-admin");
+		document.getElementById("user_div").style.display = "block";
+		document.getElementById("login_div").style.display = "none";
 
-var serviceAccount = require("path/to/serviceAccountKey.json");
+		var user = firebase.auth().currentUser;
 
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: "https://teamlitho-9ac2b-default-rtdb.firebaseio.com"
+		if (user != null) {
+
+			var email_id = user.email;
+			document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
+
+		}
+
+	} else {
+		// No user is signed in.
+
+		document.getElementById("user_div").style.display = "none";
+		document.getElementById("login_div").style.display = "block";
+
+	}
 });
+
+function login() {
+
+	var userEmail = document.getElementById("email_id").value;
+	var userPass = document.getElementById("password_id").value;
+
+	firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function (error) {
+		// Handle Errors here.
+		var errorCode = error.code;
+		var errorMessage = error.message;
+
+		window.alert("Error : " + errorMessage);
+
+		// ...
+	});
+
+}
+
+function logout() {
+	firebase.auth().signOut();
+}
